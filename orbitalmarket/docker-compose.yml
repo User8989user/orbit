@@ -19,7 +19,7 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 
   postgres-orders:
-    image: postgres:17
+    image: postgres:15
     environment:
       POSTGRES_DB: orders_db
       POSTGRES_USER: orders
@@ -28,11 +28,10 @@ services:
       - "5432:5432"
 
   postgres-payments:
-    image: postgres:17
+    image: postgres:15
     environment:
       POSTGRES_DB: payments_db
       POSTGRES_USER: payments
       POSTGRES_PASSWORD: payments_pass
     ports:
       - "5433:5432"
-
