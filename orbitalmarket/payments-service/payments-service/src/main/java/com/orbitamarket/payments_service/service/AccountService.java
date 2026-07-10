@@ -1,3 +1,13 @@
+package com.orbitamarket.payments_service.service;
+
+import com.orbitamarket.payments.exception.AccountAlreadyExistsException;
+import com.orbitamarket.payments.exception.AccountNotFoundException;
+import com.orbitamarket.payments.model.Account;
+import com.orbitamarket.payments.repository.AccountRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 @Service
 @Transactional
 @RequiredArgsConstructor

@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+    id 'io.qameta.allure' version '2.11.2'
+}
+
+group = 'com.orbitamarket'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
+    testImplementation 'org.testcontainers:testcontainers:1.19.0'
+    testImplementation 'org.testcontainers:kafka:1.19.0'
+    testImplementation 'org.testcontainers:postgresql:1.19.0'
+    testImplementation 'org.testcontainers:junit-jupiter:1.19.0'
+    testImplementation 'io.rest-assured:rest-assured:5.3.1'
+    testImplementation 'io.qameta.allure:allure-junit5:2.24.0'
+    testImplementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+    testImplementation 'org.awaitility:awaitility:4.2.0'
+}
+
+test {
+    useJUnitPlatform()
+}

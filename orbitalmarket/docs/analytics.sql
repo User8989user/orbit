@@ -1,0 +1,8 @@
+SELECT
+    user_id,
+    COUNT(*) AS paid_orders_count,
+    SUM(price) AS total_spent_geocredits
+FROM orders
+WHERE status = 'PAID'
+GROUP BY user_id
+ORDER BY total_spent_geocredits DESC;

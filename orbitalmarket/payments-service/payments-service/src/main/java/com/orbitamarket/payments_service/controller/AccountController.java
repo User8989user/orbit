@@ -1,3 +1,17 @@
+package com.orbitamarket.payments_service.controller;
+
+import com.orbitamarket.payments.exception.AccountAlreadyExistsException;
+import com.orbitamarket.payments.exception.AccountNotFoundException;
+import com.orbitamarket.payments.model.Account;
+import com.orbitamarket.payments.service.AccountService;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.Instant;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/v1/payments/accounts")
 @RequiredArgsConstructor
@@ -8,7 +22,10 @@ public class AccountController {
     public ResponseEntity<?> createAccount(@RequestHeader("X-User-Id") String userId) {
         try {
             Account account = accountService.createAccount(userId);
-            return ResponseEntity.ok(Map.of("account_id", account.getId(), "user_id", account.getUserId()));
+            return ResponseEntity.ok(Map.of(
+                    "account_id", account.getId(),
+                    "user_id", account.getUserId()
+            ));
         } catch (AccountAlreadyExistsException e) {
             return ResponseEntity.status(409).body(errorResponse("ACCOUNT_ALREADY_EXISTS", e.getMessage()));
         }
@@ -22,7 +39,11 @@ public class AccountController {
         }
         try {
             Account account = accountService.topUp(userId, request.getAmount());
-            return ResponseEntity.ok(Map.of("user_id", account.getUserId(), "balance", account.getBalance(), "currency", "geocredits"));
+            return ResponseEntity.ok(Map.of(
+                    "user_id", account.getUserId(),
+                    "balance", account.getBalance(),
+                    "currency", "geocredits"
+            ));
         } catch (AccountNotFoundException e) {
             return ResponseEntity.status(404).body(errorResponse("ACCOUNT_NOT_FOUND", e.getMessage()));
         }
@@ -32,13 +53,21 @@ public class AccountController {
     public ResponseEntity<?> getBalance(@RequestHeader("X-User-Id") String userId) {
         try {
             Account account = accountService.getBalance(userId);
-            return ResponseEntity.ok(Map.of("user_id", account.getUserId(), "balance", account.getBalance(), "currency", "geocredits"));
+            return ResponseEntity.ok(Map.of(
+                    "user_id", account.getUserId(),
+                    "balance", account.getBalance(),
+                    "currency", "geocredits"
+            ));
         } catch (AccountNotFoundException e) {
             return ResponseEntity.status(404).body(errorResponse("ACCOUNT_NOT_FOUND", e.getMessage()));
         }
     }
 
     private Map<String, Object> errorResponse(String code, String message) {
-        return Map.of("error_code", code, "message", message, "timestamp", Instant.now().toString());
+        return Map.of(
+                "error_code", code,
+                "message", message,
+                "timestamp", Instant.now().toString()
+        );
     }
 }

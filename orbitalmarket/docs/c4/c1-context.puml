@@ -1,0 +1,10 @@
+@startuml
+!include <C4/C4_Context>
+
+Person(operator, "Оператор ДЗЗ", "Продавец спутниковых данных")
+Person(analyst, "Аналитик", "Покупатель снимков")
+System(orbitamarket, "OrbitaMarket", "Платформа заказа спутниковых продуктов")
+
+Rel(operator, orbitamarket, "Управляет продуктами", "HTTP/JSON")
+Rel(analyst, orbitamarket, "Создаёт заказы, проверяет баланс", "HTTP/JSON")
+@enduml

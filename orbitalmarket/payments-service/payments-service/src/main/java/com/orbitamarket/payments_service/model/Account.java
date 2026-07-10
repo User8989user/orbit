@@ -1,3 +1,9 @@
+package com.orbitamarket.payments_service.model;
+
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Entity
 @Table(name = "accounts")
 @Data
@@ -14,5 +20,5 @@ public class Account {
     private long balance;
 
     @Version
-    private Long version;  // оптимистическая блокировка
+    private Long version;
 }
